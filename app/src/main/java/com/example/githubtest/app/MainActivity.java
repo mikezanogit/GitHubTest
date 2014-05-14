@@ -2,12 +2,11 @@ package com.example.githubtest.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-//Hello Test
+
 public class MainActivity extends Activity {
 
     @Override
@@ -36,7 +35,7 @@ public class MainActivity extends Activity {
         switch(id)
         {
             case R.id.action_SubActivity1:
-                this.onShowSubActivity1(item);
+                this.onShowSubActivity1();
                 break;
             default:
                 handled = super.onOptionsItemSelected(item);
@@ -46,7 +45,7 @@ public class MainActivity extends Activity {
 
     }
 
-    private void onShowSubActivity1(MenuItem item)
+    private void onShowSubActivity1()
     {
         Intent intent = new Intent(this,SubActivity1.class);
         startActivity(intent);
