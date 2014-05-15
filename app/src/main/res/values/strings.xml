@@ -10,5 +10,8 @@
     <string name="emoticonSequence">Sequence</string>
     <string name="emoticonSave">Save</string>
     <string name="actionSubActivity1">SubActivity1</string>
+    <string name="editTextNameHint">Your Name</string>
+    <string name="editTextName" />
+    <string name="textViewMain">Hello World!</string>
 
 </resources>

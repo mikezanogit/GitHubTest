@@ -20,7 +20,9 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText" />
+        android:id="@+id/editTextName"
+        android:hint="@string/editTextNameHint"
+        android:text="@string/editTextName" />
 
     <TextView
         android:layout_width="wrap_content"
