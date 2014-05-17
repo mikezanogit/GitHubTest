@@ -76,8 +76,24 @@ public class MainActivity extends Activity {
             case SUBACTIVITY_REQUEST_CODE:
                 handleProvideInfoResult(resultCode, data);
                 break;
+            case TAKE_PICTURE_REQUEST_CODE:
+                handleTakePictureResult(resultCode, data);
+                break;
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void handleTakePictureResult(int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            String photoPathName = mPhotoPathUri.getPath();
+            //MediaStore...where pictures go, a layer on top of the filesystem
+            //it provides thumbnails for you
+
+
+
+        } else {
+            Toast.makeText(this, "User Canceled", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void handleProvideInfoResult(int resultCode, Intent data) {

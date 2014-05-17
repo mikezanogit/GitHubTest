@@ -1,8 +1,16 @@
 package com.example.githubtest.app;
 
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.ImageView;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -55,5 +63,31 @@ public class PhotoHelper {
 
         }
         return outputDir;
+    }
+
+    public static void addPhotoToMediaStoreAndDisplayThumbnail(String pathName, Activity activity, ImageView imageView) {
+        final ImageView thumbnailImageView = imageView;
+        final Activity thumbnailActivity = activity;
+
+        String[] filesToScan = {pathName};
+
+        MediaScannerConnection.scanFile(thumbnailActivity, filesToScan, null, new MediaScannerConnection.OnScanCompletedListener() {
+            @Override
+            public void onScanCompleted(String s, Uri uri) {
+                long id = ContentUris.parseId(uri);
+                ContentResolver contentResolver = thumbnailActivity.getContentResolver();
+
+                final Bitmap thumbnail = MediaStore.Images.Thumbnails.getThumbnail(
+                        contentResolver, id, MediaStore.Images.Thumbnails.MINI_KIND, null);
+
+
+                thumbnailActivity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        thumbnailImageView.setImageBitmap(thumbnail);
+                    }
+                });
+            }
+        });
     }
 }
