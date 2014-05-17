@@ -2,9 +2,12 @@ package com.example.githubtest.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +15,10 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     private static final int SUBACTIVITY_REQUEST_CODE = 1000;
+    private static final int TAKE_PICTURE_REQUEST_CODE = 1010;
+
+    private Uri mPhotoPathUri;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +31,15 @@ public class MainActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    public void handleTakePictureButton(Button button) {
+        mPhotoPathUri = PhotoHelper.generateTimeStampPhotoFileUri();
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoPathUri);
+        startActivityForResult(intent, TAKE_PICTURE_REQUEST_CODE);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
