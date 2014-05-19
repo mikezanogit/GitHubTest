@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,12 +21,34 @@ public class MainActivity extends Activity {
 
     private Uri mPhotoPathUri;
 
+    public ImageView getmImageViewThumbnail() {
+        if (mImageViewThumbnail == null) {
+            mImageViewThumbnail = (ImageView) findViewById(R.id.imageViewThumbnail);
+        }
+        return mImageViewThumbnail;
+    }
+
+    private ImageView mImageViewThumbnail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setupViews();
     }
 
+    public void setupViews() {
+
+        Button takePicture = (Button) findViewById(R.id.buttonTakePicture);
+        takePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleTakePictureButton((Button)view);
+            }
+        });
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -34,7 +58,6 @@ public class MainActivity extends Activity {
 
     public void handleTakePictureButton(Button button) {
         mPhotoPathUri = PhotoHelper.generateTimeStampPhotoFileUri();
-
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, mPhotoPathUri);
         startActivityForResult(intent, TAKE_PICTURE_REQUEST_CODE);
@@ -88,10 +111,12 @@ public class MainActivity extends Activity {
             String photoPathName = mPhotoPathUri.getPath();
             //MediaStore...where pictures go, a layer on top of the filesystem
             //it provides thumbnails for you
+            PhotoHelper.addPhotoToMediaStoreAndDisplayThumbnail(photoPathName, this, getmImageViewThumbnail());
 
 
 
         } else {
+            mPhotoPathUri = null;
             Toast.makeText(this, "User Canceled", Toast.LENGTH_LONG).show();
         }
     }

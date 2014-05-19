@@ -13,5 +13,7 @@
     <string name="editTextNameHint">Your Name</string>
     <string name="editTextName" />
     <string name="textViewMain">Hello World!</string>
+    <string name="buttonTakePicture">Take Picture!</string>
+    <string name="contentDescriptionThumbnail">Thumbnail</string>
 
 </resources>

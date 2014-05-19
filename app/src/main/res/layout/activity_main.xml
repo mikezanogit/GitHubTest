@@ -14,4 +14,23 @@
         android:layout_height="wrap_content"
         android:id="@+id/textViewMain" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonTakePicture"
+        android:id="@+id/buttonTakePicture"
+        android:layout_below="@+id/textViewMain"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageViewThumbnail"
+        android:layout_below="@+id/buttonTakePicture"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:contentDescription="@string/contentDescriptionThumbnail"
+        android:clickable="true" />
+
 </RelativeLayout>
